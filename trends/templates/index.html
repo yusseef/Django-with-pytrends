@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/kelly.js"></script>
+    <title>Google trends</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            }   
+
+    #chartdiv {
+        width: 100%;
+        height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chartdiv"></div>
+</body>
+</html>
+<script>
+var chart = am4core.create("chartdiv", am4charts.XYChart);
+chart.dataSource.url = "http://127.0.0.1:8000/historical/";
+var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "date";
+var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+var series1 = chart.series.push(new am4charts.LineSeries());
+series1.dataFields.valueY = "miami_heat";
+series1.dataFields.categoryX = "date";
+series1.name = "Cars";
+series1.strokeWidth = 3;
+series1.tensionX = 0.7;
+series1.bullets.push(new am4charts.CircleBullet());
+
+
+chart.legend = new am4charts.Legend();
+</script>
